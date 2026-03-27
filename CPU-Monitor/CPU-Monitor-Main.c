@@ -37,5 +37,5 @@ int main() {
     }
 
     fclose(arquivo);
-    printf("CPU Monitor fechado com sucesso!");
+    printf("CPU Monitor fechado com sucesso! \n");
 }
