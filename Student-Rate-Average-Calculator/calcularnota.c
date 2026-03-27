@@ -6,20 +6,30 @@ int main() {
 
     float nota;
     float nota2;
-    printf("Coloque sua nota: ");
+    char nome[100];
+
+    printf("Bem-vindo ao calculador de notas! \n");
+    printf("==================================== \n");
+
+    printf("Digite seu nome: ");
+    scanf("%s", nome);
+
+    printf("\nColoque sua nota: ");
     scanf("%f", &nota);
-    prinf("Coloque sua segunda nota: ");
+
+    printf("\nColoque sua segunda nota: ");
     scanf("%f", &nota2);
 
+    printf("Calculando notas.. \n");
     float media = (nota + nota2) / 2;
 
-    fprint("sua media é: %.2f", media);
-    append(historico, "Nota 1: %.2f\n", nota);
-    append(historico, "Nota 2: %.2f\n", nota2);
-    append(historico, "Media: %.2f\n", media);
+    fprintf(historico, "=====================\n");
+    fprintf(historico, "---------NOTAS-------\n");
+    fprintf(historico, "| nome | nota 1 | nota 2 | média |\n");
+    fprintf(historico, "| %s | %.2f | %.2f | %.2f |\n", nome, nota, nota2, media);
+    fprintf(historico, "=====================\n");
 
-    fprintf(historico, "Seu historico é: \n");
-
+    fclose(historico);
 
     return 0;
 }
