@@ -30,6 +30,6 @@ int main() {
     fprintf(historico, "=====================\n");
 
     fclose(historico);
-
+    printf("Obrigado por usar nosso programa!!!");
     return 0;
 }
