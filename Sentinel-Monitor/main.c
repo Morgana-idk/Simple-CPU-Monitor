@@ -30,6 +30,11 @@ int main() {
     char linha[256];
 
     initscr();
+    start_color();
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(3, COLOR_RED, COLOR_BLACK);
+    init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
@@ -39,7 +44,9 @@ int main() {
     while (1){
         erase();
         if (tela_atual == 0){
+            attron(COLOR_PAIR(4));
             mvprintw(0, 0, "========SENTINEL MONITOR========");
+            attroff(COLOR_PAIR(4));
             mvprintw(1, 0, "CPU INFO      ---      MEM INFO");
             mvprintw(3, 0, "%scpu info            %smem info", opcao1, opcao2);
             mvprintw(4, 0, "Aperte Q para Sair.");
@@ -74,7 +81,9 @@ int main() {
             }
         }
     }
+            attron(COLOR_PAIR(4));
             mvprintw(0, 0, "========SENTINEL MONITOR========");
+            attroff(COLOR_PAIR(4));
             mvprintw(1, 0, "------------CPU INFO------------");
             mvprintw(3, 0, "Nome da CPU: %s", myCPU.nomecpu);
             mvprintw(4, 0, "Clock da CPU: %s", myCPU.clock);
@@ -107,10 +116,24 @@ int main() {
             }
         }
     }
+            attron(COLOR_PAIR(4));
             mvprintw(0, 0, "========SENTINEL MONITOR========");
+            attroff(COLOR_PAIR(4));
             mvprintw(1, 0, "------------MEM INFO------------");
             mvprintw(3, 0, "Memoria total: %d MB", myMEM.total);
+            if (myMEM.free < 500){
+            attron(COLOR_PAIR(3));
             mvprintw(4, 0, "Memoria livre: %d MB", myMEM.free);
+            attroff(COLOR_PAIR(3));
+            } else if (myMEM.free == 500){
+            attron(COLOR_PAIR(2));
+            mvprintw(4, 0, "Memoria livre: %d MB", myMEM.free);
+            attroff(COLOR_PAIR(2));
+            } else {
+            attron(COLOR_PAIR(1));
+            mvprintw(4, 0, "Memoria livre: %d MB", myMEM.free);
+            attroff(COLOR_PAIR(1));
+            }
             mvprintw(5, 0, "Cache: %d MB", myMEM.cache);
             mvprintw(7, 0, "Aperte M para Voltar.");
             mvprintw(8, 0, "================================");

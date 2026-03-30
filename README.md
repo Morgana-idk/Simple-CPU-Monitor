@@ -41,3 +41,10 @@ Repositório para registrar minha evolução na programação C, saindo do bási
 -  **Conceitos:** Manipulação da biblioteca ncurses, captura de teclas em tempo real (getch), controle de janelas e o loop de renderização.
 -  **Hardware vs. Software:** Implementação de navegação por setas (teclado) para selecionar módulos do sistema.
 -  **Projeto:** Início do Sentinel Monitor, uma ferramenta de monitoramento em tempo real com interface gráfica de terminal (estilo htop).
+
+### 📅 Dia 8: Máquina de Estados e Integração de Hardware
+
+- **O que aprendi:** Como gerenciar múltiplos contextos de exibição (States) em um único loop de execução.
+- **Conceitos:** Implementação de `enum` para controle de telas, leitura simultânea de múltiplos arquivos do Kernel (`/proc/cpuinfo` e `/proc/meminfo`).
+- **Resolução de Bugs:** Filtragem avançada de strings para evitar falsos positivos (ex: ignorar SwapCached ao buscar o cache real).
+- **Arquitetura:** Criação de um sistema de navegação bidirecional (Menu -> Detalhes -> Menu) mantendo a persistência dos dados.
