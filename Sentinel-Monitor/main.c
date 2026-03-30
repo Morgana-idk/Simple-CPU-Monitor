@@ -22,9 +22,10 @@ int main() {
         char nomecpu[256];
         char clock[50];
         int nucleos;
+        int uptime
     };
     
-    struct CPUINFO myCPU = {"", 0, 0};
+    struct CPUINFO myCPU = {"", 0, 0, 0};
     struct MEMINFO myMEM = {0, 0, 0};
 
     char linha[256];
@@ -52,7 +53,11 @@ int main() {
             mvprintw(4, 0, "Aperte Q para Sair.");
             mvprintw(5, 0, "================================");
         } else if (tela_atual == 1){
+            FILE *uptime = fopen("/proc/uptime", "r");
             FILE *cpuinfo = fopen("/proc/cpuinfo", "r");
+            char linhauptime[256];
+            myCPU.uptime = atoi(fgets(linhauptime, sizeof(linhauptime), uptime));
+
             while(fgets(linha, sizeof(linha), cpuinfo)){
         if (strstr(linha, "model name") != NULL){
             char *nameaddress = strchr(linha, ':') + 2;
@@ -88,8 +93,9 @@ int main() {
             mvprintw(3, 0, "Nome da CPU: %s", myCPU.nomecpu);
             mvprintw(4, 0, "Clock da CPU: %s", myCPU.clock);
             mvprintw(5, 0, "Nucleos da CPU: %d", myCPU.nucleos);
-            mvprintw(7, 0, "Aperte M para Voltar.");
-            mvprintw(8, 0, "================================");
+            mvprintw(6, 0, "Uptime: %d", myCPU.uptime);
+            mvprintw(8, 0, "Aperte M para Voltar.");
+            mvprintw(9, 0, "================================");
         } else if (tela_atual == 2){
             FILE *meminfo = fopen("/proc/meminfo", "r");
             while(fgets(linha, sizeof(linha), meminfo)){
