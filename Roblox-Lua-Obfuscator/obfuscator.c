@@ -2,12 +2,12 @@
 #include <string.h>
 
 int main() {
-    FILE *entrada = fopen("/Roblox-Lua-Obfuscator/myscript.lua", "r");
-    FILE *saida = fopen("/Roblox-Lua-Obfuscator/newscript.lua", "w");
+    FILE *entrada = fopen("myscript.lua", "r");
+    FILE *saida = fopen("newscript.lua", "w");
     char linha[256];
 
     if (entrada == NULL){
-        printf("Você precisa criar um arquivo chamado 'myscript.lua' \n ou move-lo para a pasta do app e renomea-lo para 'myscript.lua' \n");
+        printf("Voce precisa criar um arquivo chamado myscript.lua\nou move-lo para a pasta do app e renomea-lo para myscript.lua\n\n");
         return 1;
     }
 
@@ -17,14 +17,14 @@ int main() {
         if (comentario != NULL){
             *comentario = '\n';
             *(comentario + 1) = '\0';
-            printf("Script limpo com sucesso!");
-            fputs(linha, saida);
         }
+        fputs(linha, saida);
     }
     
     fclose(saida);
     fclose(entrada);
 
-    printf("Programa terminou.");
+    printf("Script limpo com sucesso!\n");
+    printf("Programa terminou.\n");
     return 0;
 }
