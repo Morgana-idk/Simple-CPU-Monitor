@@ -1,6 +1,6 @@
 # 🚀 Minha Jornada no C (Low-Level Learning)
 
-#(Estou fazendo isso com 12 anos)
+# (Estou fazendo isso com 12 anos)
 
 Repositório para registrar minha evolução na programação C, saindo do básico até o controle de hardware no Arch Linux.
 
