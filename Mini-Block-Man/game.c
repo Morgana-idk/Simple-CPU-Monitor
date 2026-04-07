@@ -19,7 +19,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         char diretorio_atual[150];
-        char diretorio_inv[] = "/home/modulescript/projetos/C-learning-projects/Mini-Block-Man/inventory-system";
+        char diretorio_inv[] = "inventory-system";
         char comando[200];
         sprintf(comando, "cd %s && make && cd %s", diretorio_inv, diretorio_atual);
         getcwd(diretorio_atual, sizeof(diretorio_atual));
