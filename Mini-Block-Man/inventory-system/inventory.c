@@ -7,16 +7,15 @@ int main(){
     struct inventory{
         char slots[5][50];
     };
-    struct inventory inv = {{"Picareta", "Machado", "Espada", "Bloco de madeira", "null"}};
+    struct inventory inv = {{"Picareta", "Machado", "Espada", "Bloco de madeira", "Vazio"}};
     for (int i = 0; i < 5; i++){
-        if (strcmp(inv.slots[i], "null") != 0 && inv.slots[i][0] != '\0'){
+        if (inv.slots[i][0] != '\0'){
+            printf("não existe\n");
+        } else {
             printf("existe\n");
             char item[50];
             sprintf(item, "%s\n", inv.slots[i]);
             fputs(item, invtxt);
-        } else {
-            printf("n existe\n");
-            
         }
     }
     return 0;

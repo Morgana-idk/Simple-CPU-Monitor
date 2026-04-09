@@ -2,25 +2,52 @@
 #include <stdlib.h>
 #include "raylib.h"
 #include <unistd.h>
+#include <string.h>
+
 
 void update_inv(){
     char diretorio_atual[150];
     char diretorio_inv[] = "inventory-system";
-    char comando[200];
-    sprintf(comando, "cd %s && make && cd %s", diretorio_inv, diretorio_atual);
-    getcwd(diretorio_atual, sizeof(diretorio_atual));
-    system(comando);
+    if (diretorio_inv != NULL){
+        char comando[200];
+        getcwd(diretorio_atual, sizeof(diretorio_atual));
+        sprintf(comando, "cd %s && make && cd %s", diretorio_inv, diretorio_atual);
+        system(comando);
+    }
+};
+
+typedef struct{
+    char slots[5][50];
+} inventory;
+
+
+inventory ler_inv(){
+    inventory inventor;
+    FILE *inv = fopen("inv.txt", "r");
+    if (inv != NULL){
+        for (int i = 0; i < 5; i++) strcpy(inventor.slots[i], "Vazio");
+        int times = 0;
+        char linha[50];
+        while (fgets(linha, sizeof(linha), inv) && times < 5){
+            strcpy(inventor.slots[times], linha);
+            system("clear");
+            printf("linha %d copiada para struct inventory: %s\n", times, linha);
+            times++;
+        }
+    }
+    return inventor;
 };
 
 int main() {
     update_inv();
+    inventory inventor;
     float speed = 300.0f;
     float gravity = 1500.0f;    // Valor mais suave para o pulo não ser bizarro
     float jumppower = -600.0f;  // Negativo porque no Y da tela, para cima é menos
     float velocityY = 0.0f;
     bool tocandochao = false;
 
-    InitWindow(800, 450, "Mini Block Man - Corrigido!");
+    InitWindow(800, 450, "Mini Block Man - Slots!");
     SetTargetFPS(60);
 
     
@@ -32,11 +59,12 @@ int main() {
         if (IsKeyDown(KEY_I)){
             update_inv();
         }
-        Rectangle slot1 = { player.x + 1, floor.y + 1, 38, 38};
-        Rectangle slot2 = { player.x + (slot1.width + 5), floor.y + 1, 38, 38};
-        Rectangle slot3 = { player.x + (slot2.width * 2) + 10, floor.y + 1, 38, 38};
-        Rectangle slot4 = { player.x - slot2.width - 5, floor.y + 1, 38, 38};
-        Rectangle slot5 = { player.x - (slot4.width * 2) - 10, floor.y + 1, 38, 38};
+        Rectangle slot1 = { player.x + 1, floor.y + 1, 38 * 2, 38};
+        Rectangle slot2 = { player.x + (slot1.width + 5), floor.y + 1, 38 * 2, 38};
+        Rectangle slot3 = { player.x + (slot2.width * 2) + 10, floor.y + 1, 38 * 2, 38};
+        Rectangle slot4 = { player.x - slot2.width - 5, floor.y + 1, 38 * 2, 38};
+        Rectangle slot5 = { player.x - (slot4.width * 2) - 10, floor.y + 1, 38 * 2, 38};
+        
         float frametime = GetFrameTime();
 
         // 1. Movimento Horizontal
@@ -76,7 +104,10 @@ int main() {
             DrawRectangleRec(slot3, GRAY);
             DrawRectangleRec(slot4, GRAY);
             DrawRectangleRec(slot5, GRAY);
-            DrawText("ESPAÇO para pular!", 10, 10, 20, DARKGRAY);
+            for (int i = 0; i < 5; i++){
+                DrawText()
+            }
+            DrawText("SLOTS!", 10, 10, 20, DARKGRAY);
         EndDrawing();
     }
     CloseWindow();
