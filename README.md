@@ -67,4 +67,9 @@ Repositório para registrar minha evolução na programação C, saindo do bási
 - **O que aprendi:** A dura realidade da incompatibilidade de software proprietário (Roblox) em hardware legado no Linux. 
 - **Conflito:** Testei Novetus, Studio Lite, Vinegar e RetroStudio. Conclusão: O "gargalo" da iGPU e o "Glue" da Microsoft tentaram barrar o progresso.
 - **Decisão:** Recusa total ao Windows. O aprendizado agora foca 100% em C e ferramentas que respeitam o usuário. Se o Studio não roda, eu construo minha própria lógica no VS Code.
-- 
+
+### 📅 Dia 12: O Arquiteto de Dados e o Protocolo de Memória
+- **O que aprendi:** Serialização de dados complexos em arquivos planos (.txt) usando delimitadores.
+- **Conceitos:** Parsing avançado com `sscanf`, manipulação de ponteiros de string (`strchr`), e encapsulamento de Structs em cascata.
+- **Hardware:** Otimização extrema. O sistema agora lê IDs e quantidades, preparando o terreno para o carregamento dinâmico de texturas (Atlas/Spritesheets).
+- **Status:** Perfeição alcançada. O Mustang 400cv agora tem injeção eletrônica programada em C.
