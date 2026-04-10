@@ -5,6 +5,16 @@
 #include <string.h>
 
 
+typedef struct{
+    char nome[50];
+    int id;
+    int quantidade;
+} item;
+
+typedef struct{
+    item slots[5];
+} inventory;
+
 void update_inv(){
     char diretorio_atual[150];
     char diretorio_inv[] = "inventory-system";
@@ -16,21 +26,39 @@ void update_inv(){
     }
 };
 
-typedef struct{
-    char slots[5][50];
-} inventory;
-
 
 inventory ler_inv(){
     inventory inventor;
     FILE *inv = fopen("inv.txt", "r");
     if (inv != NULL){
-        for (int i = 0; i < 5; i++) strcpy(inventor.slots[i], "Vazio");
+        for (int i = 0; i < 5; i++) strcpy(inventor.slots[i].nome, "Vazio");
+        for (int i = 0; i < 5; i++) inventor.slots[i].id = 0;
+        for (int i = 0; i < 5; i++) inventor.slots[i].quantidade = 1;
         int times = 0;
         char linha[50];
         while (fgets(linha, sizeof(linha), inv) && times < 5){
             strtok(linha, "\n");
-            strcpy(inventor.slots[times], linha);
+            char *antesdabarra = strchr(linha, '|');
+            if (antesdabarra != NULL){
+                *antesdabarra = '\0';
+                strcpy(inventor.slots[times].nome, antesdabarra);
+            }
+            char *depoisdabarra = strchr(linha, '|');
+            if (depoisdabarra != NULL){
+                char resultado[20];
+                int resultadoint;
+                char resultado2[20];
+                int resultado2int;
+
+                sscanf(depoisdabarra, "%*c%[^|]", resultado);
+                resultadoint = atoi(resultado);
+                inventor.slots[times].id = resultadoint;
+                sscanf(depoisdabarra, "%*c%*[^|]%*c%s", resultado2);
+                resultado2int = atoi(resultado2);
+                inventor.slots[times].quantidade = resultado2int;
+            }
+
+            
             system("clear");
             printf("linha %d copiada para struct inventory: %s\n", times, linha);
             times++;
@@ -110,7 +138,7 @@ int main() {
             DrawRectangleRec(slot.slots[3], GRAY);
             DrawRectangleRec(slot.slots[4], GRAY);
             for (int i = 0; i < 5; i++){
-                DrawText(inventor.slots[i], slot.slots[i].x + 1, slot.slots[i].y, 5, BLACK);
+                DrawText(inventor.slots[i].nome, slot.slots[i].x + 1, slot.slots[i].y, 5, BLACK);
             }
             DrawText("SLOTS!", 10, 10, 20, DARKGRAY);
         EndDrawing();
